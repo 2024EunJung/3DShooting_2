@@ -1,17 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public float moveSpeed; // 이동속도
     public float jumpPower; // 점프하는 힘
     public float rotateSpeed; // 회전 속도
+    public float distance;
+    public float distance2;
+    public GameObject InterE;
+    public GameObject InteractionDoor;
+    public GameObject SecDoor;
+    
+
 
     int jumpCount; // 점프한 횟수
 
     Rigidbody rb; // 플레이어의 Rigidbody 컴포넌트
     Animator anim; // 플레이어의 Animator 컴포넌트
+    Transform tr;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +29,10 @@ public class Player : MonoBehaviour
         // 플레이어의 Rigidbody, Animator 컴포넌트 가져와서 저장
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        tr = transform;
+        
+
+
     }
 
     // Update is called once per frame
@@ -66,18 +80,84 @@ public class Player : MonoBehaviour
         // 마우스가 움직인 만큼 Y축 회전
         transform.Rotate(0, mouseMoveX * rotateSpeed * Time.deltaTime, 0);
 
-    }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        // 충돌한 물체의 태그가 "Ground"라면
-        if(collision.gameObject.tag == "Ground")
+        Ray ray = Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f));
+        RaycastHit hit;
+
+        Physics.Raycast(ray, out hit);
+
+        distance = Vector3.Distance(hit.transform.position, tr.position);
+
+        Debug.Log(hit.collider.tag);
+
+        if (hit.collider.CompareTag("Door"))
         {
-            // 점프 횟수 초기화
-            jumpCount = 0;
 
-            // 점프 애니메이션 종료
-            anim.SetBool("isJump", false);
+
+            if (distance <= 2f)
+            {
+                ShowUIFOREKey(true);
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    InteractionDoor.GetComponent<InteractionDoor>().OpenDoor();
+                    ShowUIFOREKey(false);
+                    return;
+                }
+
+            }
+            else
+            {
+
+                ShowUIFOREKey(false);
+            }
+
+
+
+
+
         }
+
+        if (hit.collider.CompareTag("SecDoor"))
+        {
+            if (distance <= 2f)
+            {
+                ShowUIFOREKey(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    ShowUIFOREKey(false);
+                    SecDoor.GetComponent<SecDoor>().ShowUI();
+                    
+                    return;
+                }
+                
+            }
+            else
+            {
+
+                ShowUIFOREKey(false);
+            }
+        }
+      
+
     }
-}
+
+        void OnCollisionEnter(Collision collision)
+        {
+            // 충돌한 물체의 태그가 "Ground"라면
+            if (collision.gameObject.tag == "Ground")
+            {
+                // 점프 횟수 초기화
+                jumpCount = 0;
+
+                // 점프 애니메이션 종료
+                anim.SetBool("isJump", false);
+            }
+        }
+
+        void ShowUIFOREKey(bool statu)
+        {
+            InterE.SetActive(statu);
+        }
+  }
+
