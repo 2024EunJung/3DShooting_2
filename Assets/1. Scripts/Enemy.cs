@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
         // 적과 플레이어 사이의 거리 계산
         distance = Vector3.Distance(transform.position, player.position);
 
-        anim.SetFloat("velocity", agent.velocity.magnitude);
+        anim.SetFloat("speed", agent.velocity.magnitude);
 
         // 기본, 이동, 공격 상태일 때 할일 나누기
         switch (eState)
@@ -67,12 +67,12 @@ public class Enemy : MonoBehaviour
 
         if(hp > 0)// 체력이 남아 있다면
         {
-            anim.SetTrigger("damaged"); // 피격 애니메이션 실행
+            anim.SetTrigger("damage"); // 피격 애니메이션 실행
             eState = EnemyState.Damaged; // 피격 상태로 전환
         }
         else // 체력이 남아 있지 않다면
         {
-            anim.SetTrigger("dead"); //죽음 애니메이션 실행
+            anim.SetTrigger("death"); //죽음 애니메이션 실행
             eState = EnemyState.Dead; // 죽음 상태로 전환
         }
     }
