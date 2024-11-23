@@ -6,11 +6,14 @@ using UnityEngine.UI;
 public class SecDoor : MonoBehaviour
 {
     public GameObject keyPad;
-
+    public Text worngText;
+    public GameObject secDoor;
 
     string answer = "0820";
     int btnIndex;
     string input = "";
+    int index = 0;
+    public bool corectBool = false;
 
     void Start()
     {
@@ -22,27 +25,66 @@ public class SecDoor : MonoBehaviour
     {
         if (isPause)
             Time.timeScale = 0;
-        if (!isPause)
+        else if (!isPause)
             Time.timeScale = 1f;
     }
 
     public void InputingAnser(int inputNum)
     {
-        if(input.Length <= 4)
-            input = input + inputNum.ToString();
+
+        
+        if(input == null)
+        {
+            input += inputNum.ToString();
+        }
+        else
+        {
+            if(input.Length <= 4)
+            {
+                input += inputNum.ToString();
+            }
+            else
+            {
+                input = "";
+                input += inputNum.ToString();
+            }
+                
+        }
+        
 
     }
 
     public void CheckingAnser()
     {
-        if (input == answer)
+        if(index <= 5)
         {
+            if (input == answer)
+            {
+                keyPad.SetActive(false);
+                Pause(false);
+                corectBool = true;
+            }
+            else 
+            { 
+                
+                if(worngText.text != "오답입니다.")
+                {
+                    index++;
+                    worngText.text = "오답입니다." + index;
+                }
+                else
+                {
+                    worngText.text = "오답입니다.";
+                } 
+            }
+        }
+        else if(index > 5)
+        {
+            Exit();
+            index = 0;
+        }   
 
-        }
-        else 
-        { 
-            
-        }
+        
     }
 
     public void Exit()
@@ -63,5 +105,10 @@ public class SecDoor : MonoBehaviour
     {
         keyPad.SetActive(true);
         Pause(true);
+    }
+
+    public void RotationSecDoor()
+    {
+        secDoor.transform.Rotate(0,-70 * Time.deltaTime,0);
     }
 }

@@ -18,7 +18,7 @@ public class DoorRotate : MonoBehaviour
               
         if (openDoor)
         {
-            door.Rotate(0, 1 * Time.deltaTime * speed, 0);
+            door.Rotate(0, +1 * Time.deltaTime * speed, 0);
             if(doorRotateValue >= Mathf.Abs(0.5f))
             {
                 openDoor = false;

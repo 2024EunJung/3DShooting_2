@@ -6,27 +6,27 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public float moveSpeed; // ÀÌµ¿¼Óµµ
-    public float jumpPower; // Á¡ÇÁÇÏ´Â Èû
-    public float rotateSpeed; // È¸Àü ¼Óµµ
+    public float moveSpeed; // ï¿½Ìµï¿½ï¿½Óµï¿½
+    public float jumpPower; // ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½
+    public float rotateSpeed; // È¸ï¿½ï¿½ ï¿½Óµï¿½
     public float distance;
-    public float distance2;
+    
     public GameObject InterE;
     public GameObject InteractionDoor;
     public GameObject SecDoor;
     
 
 
-    int jumpCount; // Á¡ÇÁÇÑ È½¼ö
+    int jumpCount; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½
 
-    Rigidbody rb; // ÇÃ·¹ÀÌ¾îÀÇ Rigidbody ÄÄÆ÷³ÍÆ®
-    Animator anim; // ÇÃ·¹ÀÌ¾îÀÇ Animator ÄÄÆ÷³ÍÆ®
+    Rigidbody rb; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ Rigidbody ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+    Animator anim; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ Animator ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
     Transform tr;
 
     // Start is called before the first frame update
     void Start()
     {
-        // ÇÃ·¹ÀÌ¾îÀÇ Rigidbody, Animator ÄÄÆ÷³ÍÆ® °¡Á®¿Í¼­ ÀúÀå
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ Rigidbody, Animator ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         tr = transform;
@@ -38,46 +38,46 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // ¹æÇâÅ° ¶Ç´Â WASDÅ° ÀÔ·ÂÀ» ¼ýÀÚ·Î ¹Þ¾Æ¼­ ÀúÀå
+        // ï¿½ï¿½ï¿½ï¿½Å° ï¿½Ç´ï¿½ WASDÅ° ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú·ï¿½ ï¿½Þ¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        // xÃà¿¡´Â hÀÇ °ªÀ», zÃà¿¡´Â vÀÇ °ªÀ» ³ÖÀº º¯¼ö »ý¼º
+        // xï¿½à¿¡ï¿½ï¿½ hï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, zï¿½à¿¡ï¿½ï¿½ vï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Vector3 dir = new Vector3(h, 0, v);
 
-        // ¸ðµç ¹æÇâÀÇ ¼Óµµ°¡ µ¿ÀÏÇÏµµ·Ï Á¤±ÔÈ­
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
         dir.Normalize();
 
-        // ÇÃ·¹ÀÌ¾î¸¦ ±âÁØÀ¸·Î dirÀÇ ¹æÇâ Á¶Àý
+        // ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ dirï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         dir = transform.TransformDirection(dir);
 
-        //// xÃà¿¡´Â hÀÇ °ªÀ», zÃà¿¡´Â vÀÇ °ªÀ» °è¼Ó ´õÇÏ±â
+        //// xï¿½à¿¡ï¿½ï¿½ hï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, zï¿½à¿¡ï¿½ï¿½ vï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½
         //transform.position += dir * moveSpeed * Time.deltaTime;
 
-        // ¹°¸® ÀÛ¿ëÀ» ÀÌ¿ëÇØ ÀÌµ¿
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Û¿ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
         rb.MovePosition(rb.position + (dir * moveSpeed * Time.deltaTime));
 
-        // ÀÌµ¿ÇÏ´Â ¼Óµµ¸¦ velocity º¯¼ö¿¡ ÇÒ´ç
+        // ï¿½Ìµï¿½ï¿½Ï´ï¿½ ï¿½Óµï¿½ï¿½ï¿½ velocity ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½
         anim.SetFloat("velocity", dir.magnitude);
 
-        // <Space> Å°¸¦ ´©¸¥ ¼ø°£, Á¡ÇÁÇÑ È½¼ö°¡ 2È¸ ¹Ì¸¸ÀÌ¶ó¸é
+        // <Space> Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½ï¿½ï¿½ 2È¸ ï¿½Ì¸ï¿½ï¿½Ì¶ï¿½ï¿½
         if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 2)
         {
-            // À§·Î ¼ø°£ÀûÀÎ Èû ¹ß»ý
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß»ï¿½
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 
-            // Á¡ÇÁ ¾Ö´Ï¸ÞÀÌ¼Ç ½ÇÇà
+            // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
             anim.SetTrigger("jump");
             anim.SetBool("isJump", true);
 
-            // Á¡ÇÁÇÒ ¶§¸¶´Ù Á¡ÇÁ È½¼ö Áõ°¡
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             jumpCount++;
         }
 
-        // ¸¶¿ì½ºÀÇ ÁÂ¿ì ¿òÁ÷ÀÓ ÀÔ·ÂÀ» ¼ýÀÚ·Î ¹Þ¾Æ¼­ ÀúÀå
+        // ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú·ï¿½ ï¿½Þ¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½
         float mouseMoveX = Input.GetAxis("Mouse X");
 
-        // ¸¶¿ì½º°¡ ¿òÁ÷ÀÎ ¸¸Å­ YÃà È¸Àü
+        // ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å­ Yï¿½ï¿½ È¸ï¿½ï¿½
         transform.Rotate(0, mouseMoveX * rotateSpeed * Time.deltaTime, 0);
 
 
@@ -86,9 +86,10 @@ public class Player : MonoBehaviour
 
         Physics.Raycast(ray, out hit);
 
-        distance = Vector3.Distance(hit.transform.position, tr.position);
+        distance = Mathf.Abs(hit.transform.position.x - tr.position.x) + Mathf.Abs(hit.transform.position.z - tr.position.z);
+        //Vector3.Distance(hit.transform.position, tr.position);
 
-        Debug.Log(hit.collider.tag);
+        
 
         if (hit.collider.CompareTag("Door"))
         {
@@ -119,24 +120,29 @@ public class Player : MonoBehaviour
         }
 
         if (hit.collider.CompareTag("SecDoor"))
-        {
-            if (distance <= 2f)
+        {   
+            
+            if(!SecDoor.GetComponent<SecDoor>().corectBool)
             {
-                ShowUIFOREKey(true);
-                if (Input.GetKeyDown(KeyCode.E))
+                if (distance <= 2f)
                 {
-                    ShowUIFOREKey(false);
-                    SecDoor.GetComponent<SecDoor>().ShowUI();
+                    ShowUIFOREKey(true);
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        ShowUIFOREKey(false);
+                        SecDoor.GetComponent<SecDoor>().ShowUI();
+                        
+                        return;
+                    }
                     
-                    return;
                 }
-                
-            }
-            else
-            {
+                else
+                {
 
-                ShowUIFOREKey(false);
+                    ShowUIFOREKey(false);
+                }
             }
+            
         }
       
 
@@ -144,13 +150,13 @@ public class Player : MonoBehaviour
 
         void OnCollisionEnter(Collision collision)
         {
-            // Ãæµ¹ÇÑ ¹°Ã¼ÀÇ ÅÂ±×°¡ "Ground"¶ó¸é
+            // ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½Â±×°ï¿½ "Ground"ï¿½ï¿½ï¿½
             if (collision.gameObject.tag == "Ground")
             {
-                // Á¡ÇÁ È½¼ö ÃÊ±âÈ­
+                // ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½ ï¿½Ê±ï¿½È­
                 jumpCount = 0;
 
-                // Á¡ÇÁ ¾Ö´Ï¸ÞÀÌ¼Ç Á¾·á
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½
                 anim.SetBool("isJump", false);
             }
         }
