@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
         agent.isStopped = true; // 이동 중단
         agent.ResetPath(); // 경로 초기화
 
-        if(hp > 0)// 체력이 남아 있다면
+        if (hp > 0)// 체력이 남아 있다면
         {
             anim.SetTrigger("damage"); // 피격 애니메이션 실행
             eState = EnemyState.Damaged; // 피격 상태로 전환
@@ -74,12 +74,28 @@ public class Enemy : MonoBehaviour
         {
             anim.SetTrigger("death"); //죽음 애니메이션 실행
             eState = EnemyState.Dead; // 죽음 상태로 전환
+
+            // NavMeshAgent 비활성화
+            agent.enabled = false;
+
+            // Rigidbody 활성화
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = false; // 물리 효과 적용
+                rb.useGravity = true;  // 중력 활성화
+            }
         }
     }
-    void DamagedEnd()
+    public void DamagedEnd()
     {
-        eState = EnemyState.Idle; // 기본 상태로 전환
+        if (hp > 0)
+        {
+            eState = EnemyState.Idle; // 상태를 Idle로 전환
+            agent.isStopped = false;  // 이동 재개
+        }
     }
+
     void Idle() // 기본 상태일 때 계속 할 일
     {
         // 플레이어와의 거리가 8 이하라면

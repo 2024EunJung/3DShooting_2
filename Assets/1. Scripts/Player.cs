@@ -43,8 +43,8 @@ public class Player : MonoBehaviour
         // 물리 작용을 이용해 이동
         rb.MovePosition(rb.position + (dir * moveSpeed * Time.deltaTime));
 
-        // 이동하는 속도를 velocity 변수에 할당
-        anim.SetFloat("velocity", dir.magnitude);
+        // 애니메이션 관련 코드 비활성화
+        // anim.SetFloat("velocity", dir.magnitude);
 
         // <Space> 키를 누른 순간, 점프한 횟수가 2회 미만이라면
         if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 2)
@@ -52,9 +52,9 @@ public class Player : MonoBehaviour
             // 위로 순간적인 힘 발생
             rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 
-            // 점프 애니메이션 실행
-            anim.SetTrigger("jump");
-            anim.SetBool("isJump", true);
+            // 점프 애니메이션 실행 비활성화
+            // anim.SetTrigger("jump");
+            // anim.SetBool("isJump", true);
 
             // 점프할 때마다 점프 횟수 증가
             jumpCount++;
@@ -71,13 +71,13 @@ public class Player : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         // 충돌한 물체의 태그가 "Ground"라면
-        if(collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground")
         {
             // 점프 횟수 초기화
             jumpCount = 0;
 
-            // 점프 애니메이션 종료
-            anim.SetBool("isJump", false);
+            // 점프 애니메이션 종료 비활성화
+            // anim.SetBool("isJump", false);
         }
     }
 }
