@@ -25,7 +25,7 @@ public class PlayerFire : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             // 총 쏘는 애니메이션 실행
-            anim.SetTrigger("shoot");
+            //anim.SetTrigger("shoot");
 
             // 화면 가운데에서 시작하는 Ray 생성
             Ray ray = Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f));
