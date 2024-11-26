@@ -14,12 +14,16 @@ public class SecDoor : MonoBehaviour
     string input = "";
     int index = 0;
     public bool corectBool = false;
+    public bool turningBool = false;
 
-    void Start()
+
+    private void FixedUpdate()
     {
-        
+        //if(turningBool == true)
+        //{
+        //    RotationSecDoor();
+        //}
     }
-
 
     public void Pause(bool isPause)
     {
@@ -58,11 +62,14 @@ public class SecDoor : MonoBehaviour
     {
         if(index <= 5)
         {
+            print(input);
             if (input == answer)
             {
                 keyPad.SetActive(false);
                 Pause(false);
                 corectBool = true;
+                //secDoor.SetActive(false);
+                turningBool = true;
             }
             else 
             { 
@@ -109,6 +116,10 @@ public class SecDoor : MonoBehaviour
 
     public void RotationSecDoor()
     {
-        secDoor.transform.Rotate(0,-70 * Time.deltaTime,0);
+        //if(secDoor.transform.rotation.y > -70000000f)
+        //{
+        //    secDoor.transform.Rotate(0, -1 * 5, 0);
+        //}
+        secDoor.SetActive(false);
     }
 }

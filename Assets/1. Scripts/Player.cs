@@ -30,8 +30,8 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         tr = transform;
-        
 
+        
 
     }
 
@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
         distance = Mathf.Abs(hit.transform.position.x - tr.position.x) + Mathf.Abs(hit.transform.position.z - tr.position.z);
         //Vector3.Distance(hit.transform.position, tr.position);
 
-        
+
 
         if (hit.collider.CompareTag("Door"))
         {
@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
         }
 
         if (hit.collider.CompareTag("SecDoor"))
-        {   
+        {
             
             if(!SecDoor.GetComponent<SecDoor>().corectBool)
             {
