@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/0. Scenes/2.PlayScene.unity
     guid: 2648acb48b227784d80c5c5b95abcddd
+  - enabled: 1
+    path: Assets/0. Scenes/PlayScene_lsh.unity
+    guid: 72abbdcfe4dbe8049ae3d36ca817f75a
+  - enabled: 1
+    path: Assets/0. Scenes/3.GameOverScene.unity
+    guid: 482a43c3c444ccb4aacc9480cd050938
   m_configObjects: {}

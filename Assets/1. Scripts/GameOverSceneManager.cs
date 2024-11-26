@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement; // 씬 관리 네임스페이스 추가
-
 public class GameOverSceneManager : MonoBehaviour
 {
     public void RestartGame()
@@ -10,4 +9,3 @@ public class GameOverSceneManager : MonoBehaviour
         SceneManager.LoadScene(PlayScene_lsh);
     }
 }
-
