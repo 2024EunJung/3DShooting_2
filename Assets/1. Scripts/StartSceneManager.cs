@@ -8,6 +8,6 @@ public class StartSceneManager : MonoBehaviour
     public void OnClickStart()
     {
         // 2.PlayScene 라는 이름의 씬 불러오기 (씬 전환)
-        SceneManager.LoadScene("2.PlayScene");
+        SceneManager.LoadScene("PlayScene_lsh");
     }
 }

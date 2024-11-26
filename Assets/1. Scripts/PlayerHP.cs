@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHP : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class PlayerHP : MonoBehaviour
         else
         {
             // 죽음 애니메이션 실행
-            anim.SetTrigger("dead");
+            //anim.SetTrigger("dead");
 
             // 플레이어의 기능 중단
             GetComponent<Player>().enabled = false;
@@ -50,6 +51,8 @@ public class PlayerHP : MonoBehaviour
             {
                 enemy.enabled = false;
             }
+
+            SceneManager.LoadScene("3.GameOverScene");
         }
     }
 }
